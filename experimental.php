@@ -1,54 +1,57 @@
 <?php
 
-// ORDER PIZZA
-function orderPizza($pizzatype, $forWho)
+// CALC PIZZA PRICE
+function calcPizzaPrice($pizzaPrice)
 {
-    $address = '';
-    $price = calcPizzaPrice($pizzatype);
-
-    if ($forWho == 'koen') {
-        $address = 'a yacht in Antwerp';
-    } elseif ($forWho == 'manuele') {
-        $address = 'somewhere in Belgium';
-    } elseif ($forWho == 'students') {
-        $address = 'BeCode office';
+    if ($pizzaPrice == 'marguerita') {
+        $cost = 5;
+    }
+    if ($pizzaPrice == 'golden') {
+        $cost = 100;
     }
 
-    echo 'Creating new order...';
+    if ($pizzaPrice == 'calzone') {
+        $cost = 10;
+    }
+
+    if ($pizzaPrice == 'hawai') {
+        throw new Exception('Computer says no');
+    }
+
+    return $cost;
+}
+
+// ORDER PIZZA
+function orderPizza($pizzaType, $customer)
+{
+    $address = '';
+    $price = calcPizzaPrice($pizzaType);
+
+
+    if ($customer == 'koen') {
+        $address = 'a yacht in Antwerp';
+    } else {
+        if ($customer == 'manuele') {
+            $address = 'somewhere in Belgium';
+        }
+
+        if ($customer == 'students') {
+            $address = 'BeCode office';
+        }
+    }
+
+    // echo output
+    echo '<b>Creating new order...</b>';
     echo '<br>';
-    echo 'A ' . $pizzatype . ' pizza should be sent to ' . $forWho;
+    echo "A {$pizzaType} pizza should be sent to {$customer}";
     echo '<br>';
     echo 'The address: ' . $address;
     echo '<br>';
     echo 'The bill is €' . $price;
     echo '<br>';
-    echo "Order finished.";
+    echo 'Order finished.';
     echo '<br>';
     echo '<br>';
-}
-
-
-// CALC PIZZA PRICE
-function calcPizzaPrice($pizzaPrice)
-{
-
-    if ($pizzaPrice == 'marguerita') {
-        $cost = 5;
-    } else {
-        if ($pizzaPrice == 'golden') {
-            $cost = 100;
-        }
-
-        if ($pizzaPrice == 'calzone') {
-            $cost = 10;
-        }
-
-        if ($pizzaPrice == 'hawai') {
-            throw new Exception('Computer says no');
-        }
-    }
-
-    return $cost;
 }
 
 
@@ -61,10 +64,3 @@ function orderAllPizza()
 }
 
 orderAllPizza();
-
-
-// TOTAL PRICE
-function totalPrice($price)
-{
-    return $price;
-}
